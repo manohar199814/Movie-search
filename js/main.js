@@ -5,18 +5,20 @@ const input = document.getElementById('searchText');
 
 let favMovies = [];
 
-//Trigger only for index page
-if(window.location.href === ('https://manohar199814.github.io/Movie-search/') || window.location.href === ('https://manohar199814.github.io/Movie-search/index.html') ){
-    window.addEventListener('load', (event) => {
+
+
+window.addEventListener('load', (event) => {
         document.addEventListener('click',removeElements);
         input.addEventListener("keyup", (e) => { searchMovie(input.value)});
-        searchForm.addEventListener('submit',(e) => {
+        if(searchForm) {
+            searchForm.addEventListener('submit',(e) => {
             let searchString = e.target.elements[0].value;
             getMovies(searchString);
             e.preventDefault();
-        });
-    });
-};
+             });
+        }
+        
+    });    
 
 //search movie to give suggetions
 async function searchMovie(searchText) {
