@@ -1,0 +1,31 @@
+#movies img, #movie img{
+    width:100%;
+  }
+  
+  @media(min-width:960px){
+    #movies .col-md-3 .well{
+      height: 390px;
+    }
+  
+    #movies .col-md-3 img{
+      height:240px;
+    }
+
+    .button-group{
+        display:flex;
+        justify-content: space-around;
+    }
+  }
+
+#searchForm{
+  position: relative;
+}
+.list-style{
+  position:absolute;
+  z-index:1;
+  width: 100%;
+  overflow: hidden;
+  margin: auto;
+}
+
+
