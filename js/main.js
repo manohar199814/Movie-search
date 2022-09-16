@@ -6,7 +6,7 @@ const input = document.getElementById('searchText');
 let favMovies = [];
 
 //Trigger only for index page
-if(window.location.href.includes('index.html')){
+if(window.location.href === ('https://manohar199814.github.io/Movie-search/') || window.location.href === ('https://manohar199814.github.io/Movie-search/index.html') ){
     window.addEventListener('load', (event) => {
         document.addEventListener('click',removeElements);
         input.addEventListener("keyup", (e) => { searchMovie(input.value)});
