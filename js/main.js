@@ -9,7 +9,9 @@ let favMovies = [];
 
 window.addEventListener('load', (event) => {
         document.addEventListener('click',removeElements);
-        input.addEventListener("keyup", (e) => { searchMovie(input.value)});
+        if(input) {
+            input.addEventListener("keyup", (e) => { searchMovie(input.value)});
+        }
         if(searchForm) {
             searchForm.addEventListener('submit',(e) => {
             let searchString = e.target.elements[0].value;
