@@ -58,7 +58,7 @@ function displayNames(value) {
 
 function removeElements() {
     //clear all the item
-    let items = document.querySelectorAll(".list-group-item");
+    let items = document.querySelectorAll("#searchForm .list-group-item");
     items.forEach((item) => {
       item.remove();
     });
