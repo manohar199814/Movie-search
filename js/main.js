@@ -190,6 +190,7 @@ function addToFavorites(id){
     }
 
     if(favMovies.includes(id)){
+        alert('This movie is already in favourites');
         return;
     }
     favMovies.push(id);
