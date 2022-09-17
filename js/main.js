@@ -6,30 +6,27 @@ const input = document.getElementById('searchText');
 let favMovies = [];
 
 
-
 window.addEventListener('load', (event) => {
-        document.addEventListener('click',removeElements);
-        if(input) {
-            input.addEventListener("keyup", (e) => { searchMovie(input.value)});
-        }
-        if(searchForm) {
-            searchForm.addEventListener('submit',(e) => {
-            let searchString = e.target.elements[0].value;
-            getMovies(searchString);
-            e.preventDefault();
-             });
-        }
-        
-    });    
+    document.addEventListener('click',removeElements);
+    if(input) {
+        input.addEventListener("keyup", (e) => { searchMovie(input.value)});
+    }
+    if(searchForm) {
+        searchForm.addEventListener('submit',(e) => {
+        let searchString = e.target.elements[0].value;
+        getMovies(searchString);
+        e.preventDefault();
+        });
+    }
+});
+
 
 //search movie to give suggetions
 async function searchMovie(searchText) {
     const res = await fetch('https://www.omdbapi.com/?s='+searchText+'&apikey=b5a2eba4');
     const data = await res.json();
-    console.log(data,'from search movie');
     if(data.Response === 'True'){
         movies = data.Search
-        console.log(movies,'movies');
         removeElements();
         for (let i of movies) {
             if (
@@ -71,10 +68,8 @@ function removeElements() {
 async function getMovieTitle(title) {
     const res = await fetch('https://www.omdbapi.com/?t='+title+'&apikey=b5a2eba4');
     const data = await res.json();
-    console.log(data,'from get movie');
     if(data.Response === 'True'){
         let movie = data;
-            console.log(movie);
             let output = '';
             if(movie){
                 output += `
@@ -99,16 +94,12 @@ async function getMovieTitle(title) {
 
 //function to get movie by search string
 function getMovies(searchString) {
-    console.log(searchString);
     fetch('https://www.omdbapi.com/?s='+searchString+'&apikey=b5a2eba4')
     .then((response) => {
-        console.log(response);
         return response.json();
     }).then((data) => {
-       console.log(data);
        if(data.Response === 'True'){
             let movies = data.Search;
-            console.log(movies);
             let output = '';
             if(movies){
             movies.forEach((movie) => {
@@ -127,11 +118,9 @@ function getMovies(searchString) {
                 `;
             })
             moviesList.innerHTML = output; 
-        }else{
-                getMovieTitle(searchString)
-                // output = `<h1>${data.Error}</h1>`;
-                // moviesList.innerHTML = output;
         }
+    }else{
+        getMovieTitle(searchString)
     }
     })
     .catch((err) => {
@@ -153,10 +142,8 @@ function getMovie() {
 
     fetch('https://www.omdbapi.com/?i='+movieId+'&apikey=b5a2eba4')
     .then((response) => {
-        console.log(response);
         return response.json();
     }).then((movie) => {
-        console.log(movie);
         let output =`
         <div class="row">
           <div class="col-md-4">
@@ -196,8 +183,6 @@ function getMovie() {
 //add to favourites
 
 function addToFavorites(id){
-    console.log('addToFavorites');
-
     if(localStorage.getItem('favMovies')){
         var favMovies = localStorage.getItem('favMovies').split(',');
     }else{
@@ -208,9 +193,7 @@ function addToFavorites(id){
         return;
     }
     favMovies.push(id);
-    console.log(favMovies.join(','));
     localStorage.setItem('favMovies',favMovies.join(','));
-    console.log('alert')
     window.alert('added to favourites');
 }
 
@@ -222,7 +205,6 @@ function getFavMovies(){
     }else{
         var favMovies = [];
     }
-    console.log(favMovies,'from get fav movies');
 
     let output = '';
 
@@ -236,10 +218,8 @@ function getFavMovies(){
 
         fetch('https://www.omdbapi.com/?i='+movieId+'&apikey=b5a2eba4')
         .then((response) => {
-            console.log(response);
             return response.json();
         }).then((movie) =>{
-            console.log(movie)
             output = `
             <div class="col-md-3 mt-4">
             <div class="well text-center">
@@ -262,13 +242,10 @@ function getFavMovies(){
 
 //remove from favourites
 function removeFromFavorites(id) {
-    console.log('from favourites');
     var favMovies = localStorage.getItem('favMovies').split(',');
-    console.log(favMovies);
     if(favMovies.includes(id)){
         let index = favMovies.indexOf(id);
         favMovies.splice(index,1);
-        console.log(favMovies);
         localStorage.setItem('favMovies',favMovies.join(','));
         window.location = 'favMovie.html'
     }

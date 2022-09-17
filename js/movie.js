@@ -4,10 +4,8 @@ function getMovie() {
 
     fetch('https://www.omdbapi.com/?i='+movieId+'&apikey=b5a2eba4')
     .then((response) => {
-        console.log(response);
         return response.json();
     }).then((movie) => {
-        console.log(movie);
         let output =`
         <div class="row">
           <div class="col-md-4">
