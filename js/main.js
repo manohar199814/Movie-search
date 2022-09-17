@@ -211,7 +211,6 @@ function getFavMovies(){
 
     if(favMovies.length === 0){
         moviesList.insertAdjacentHTML('beforeend','<h1 class="mt-5">No favorites!! Add one</h1>');
-        moviesList.insertAdjacentHTML('afterend','<a href="index.html" class="btn btn-danger ml-3" >Go Back To Search</a>');
         return;
     }
 
